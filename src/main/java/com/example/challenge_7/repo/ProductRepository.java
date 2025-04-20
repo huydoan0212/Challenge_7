@@ -1,11 +1,12 @@
-package com.example.challenge5.repo;
+package com.example.challenge_7.repo;
 
 
-import com.example.challenge5.entity.Product;
+import com.example.challenge_7.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, String>, JpaSpecificationExecutor<Product> {
 
 }

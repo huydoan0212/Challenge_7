@@ -1,12 +1,13 @@
-package com.example.challenge5.services.impl;
+package com.example.challenge_7.services.impl;
 
-import com.example.challenge5.dto.request.AuthenticationRequest;
-import com.example.challenge5.dto.response.AuthenticationResponse;
-import com.example.challenge5.entity.User;
-import com.example.challenge5.exception.CustomException;
-import com.example.challenge5.exception.Error;
-import com.example.challenge5.repo.UserRepository;
-import com.example.challenge5.services.AuthenticationService;
+
+import com.example.challenge_7.dto.request.AuthenticationRequest;
+import com.example.challenge_7.dto.response.AuthenticationResponse;
+import com.example.challenge_7.entity.User;
+import com.example.challenge_7.exception.CustomException;
+import com.example.challenge_7.exception.Error;
+import com.example.challenge_7.repo.UserRepository;
+import com.example.challenge_7.services.AuthenticationService;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;

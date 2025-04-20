@@ -1,4 +1,4 @@
-package com.example.challenge5.dto.response;
+package com.example.challenge_7.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -15,4 +15,5 @@ public class ProductResponse {
     String brand;
     String type;
     String description;
+    Integer price;
 }

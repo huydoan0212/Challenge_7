@@ -1,11 +1,11 @@
-package com.example.challenge5.services;
+package com.example.challenge_7.services;
 
-import com.example.challenge5.dto.request.AuthenticationRequest;
-import com.example.challenge5.dto.response.AuthenticationResponse;
-import com.example.challenge5.entity.User;
+
+import com.example.challenge_7.dto.request.AuthenticationRequest;
+import com.example.challenge_7.dto.response.AuthenticationResponse;
+import com.example.challenge_7.entity.User;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jwt.SignedJWT;
-
 
 import java.text.ParseException;
 

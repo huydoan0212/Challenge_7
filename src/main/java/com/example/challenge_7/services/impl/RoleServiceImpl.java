@@ -1,60 +1,55 @@
-package com.example.challenge5.services.impl;
+package com.example.challenge_7.services.impl;
 
-import com.example.challenge5.dto.request.RoleRequest;
-import com.example.challenge5.dto.response.RoleResponse;
-import com.example.challenge5.entity.Role;
-import com.example.challenge5.exception.CustomException;
-import com.example.challenge5.exception.Error;
-import com.example.challenge5.repo.RoleRepository;
-import com.example.challenge5.services.RoleService;
+
+import com.example.challenge_7.dto.request.RoleRequest;
+import com.example.challenge_7.dto.response.RoleResponse;
+import com.example.challenge_7.entity.Role;
+import com.example.challenge_7.exception.CustomException;
+import com.example.challenge_7.exception.Error;
+import com.example.challenge_7.mapper.RoleMapper;
+import com.example.challenge_7.repo.RoleRepository;
+import com.example.challenge_7.services.RoleService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Service
+@PreAuthorize("hasRole('ADMIN')")
 public class RoleServiceImpl implements RoleService {
     RoleRepository roleRepository;
+    RoleMapper roleMapper;
 
     @Override
     public List<RoleResponse> getRoles() {
         List<RoleResponse> roles = new ArrayList<>();
         roleRepository.findAll().forEach(role -> {
-            roles.add(RoleResponse.builder()
-                    .name(role.getName())
-                    .description(role.getDescription())
-                    .build());
+            roles.add(roleMapper.toRoleResponse(role));
         });
         return roles;
     }
 
     @Override
     public RoleResponse addRole(RoleRequest roleRequest) {
-        roleRepository.save(Role.builder()
-                .description(roleRequest.getDescription())
-                .name(roleRequest.getName())
-                .build());
-        return RoleResponse.builder()
-                .description(roleRequest.getDescription())
-                .name(roleRequest.getName())
-                .build();
+        if (roleRepository.existsById(roleRequest.getName())) {
+            throw new CustomException(Error.ROLE_EXISTED);
+        }
+        Role role = roleMapper.toRole(roleRequest);
+
+        return roleMapper.toRoleResponse(roleRepository.save(role));
     }
 
     @Override
-    public RoleResponse updateRole(RoleRequest roleRequest) {
-        Role role = roleRepository.findById(roleRequest.getName()).orElseThrow(() -> new CustomException(Error.ROLE_NOT_FOUND));
+    public RoleResponse updateRole(String id, RoleRequest roleRequest) {
+        Role role = roleRepository.findById(id).orElseThrow(() -> new CustomException(Error.ROLE_NOT_FOUND));
         role.setName(roleRequest.getName());
-        role.setDescription(roleRequest.getDescription());
-        roleRepository.save(role);
-        return RoleResponse.builder()
-                .description(roleRequest.getDescription())
-                .name(roleRequest.getName())
-                .build();
+        return roleMapper.toRoleResponse(roleRepository.save(role));
     }
 
     @Override

@@ -1,7 +1,8 @@
-package com.example.challenge5.config;
+package com.example.challenge_7.config;
 
-import com.example.challenge5.jwt.CustomJwtDecoder;
-import com.example.challenge5.jwt.JwtAuthenticationEntryPoint;
+
+import com.example.challenge_7.jwt.CustomJwtDecoder;
+import com.example.challenge_7.jwt.JwtAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    private final String[] PUBLIC_ENDPOINTS = {"api/users", "api/products"};
+    private final String[] PUBLIC_ENDPOINTS = {"/api/users", "/api/products"};
     @Autowired
     private CustomJwtDecoder customJwtDecoder;
 
@@ -28,10 +29,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(request ->
                 request
-                        .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS)
-                        .permitAll()
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/auth/token", "api/users")
-                        .permitAll()
+                        .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS).permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/auth/token", "/api/users", "/api/payment/**").permitAll()
                         .anyRequest().authenticated()
         );
         httpSecurity.oauth2ResourceServer(
@@ -43,6 +42,7 @@ public class SecurityConfig {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         return httpSecurity.build();
     }
+
 
     @Bean
     JwtAuthenticationConverter jwtAuthenticationConverter() {

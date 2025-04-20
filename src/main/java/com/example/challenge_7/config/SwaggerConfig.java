@@ -1,4 +1,4 @@
-package com.example.challenge5.config;
+package com.example.challenge_7.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -25,7 +25,7 @@ public class SwaggerConfig {
     public GroupedOpenApi publicApi(@Value("${openapi.service.api-docs}") String apiDocs) {
         return GroupedOpenApi.builder()
                 .group(apiDocs)
-                .packagesToScan("com.example.challenge5.controller")
+                .packagesToScan("com.example.challenge_7.controller")
                 .build();
     }
 

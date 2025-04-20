@@ -1,4 +1,4 @@
-package com.example.challenge5.exception;
+package com.example.challenge_7.exception;
 
 public class CustomException extends RuntimeException {
     private Error error;

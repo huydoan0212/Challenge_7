@@ -1,8 +1,9 @@
-package com.example.challenge5.jwt;
+package com.example.challenge_7.jwt;
 
-import com.example.challenge5.dto.response.ApiResponse;
-import com.example.challenge5.exception.Error;
+import com.example.challenge_7.dto.response.ApiResponse;
+import com.example.challenge_7.exception.Error;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.MediaType;
@@ -12,8 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {

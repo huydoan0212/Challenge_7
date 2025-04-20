@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CartRequest {
+public class CartCreationWithCartItemRequest {
     String userId;
     List<CartItemRequest> cartItemRequests;
 }

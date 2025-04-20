@@ -1,16 +1,18 @@
-package com.example.challenge5.controller;
+package com.example.challenge_7.controller;
 
 
-import com.example.challenge5.dto.request.ProductCreationRequest;
-import com.example.challenge5.dto.request.ProductUpdateRequest;
-import com.example.challenge5.dto.response.ApiResponse;
-import com.example.challenge5.dto.response.ProductResponse;
-import com.example.challenge5.entity.Product;
-import com.example.challenge5.services.impl.ProductServiceImpl;
+import com.example.challenge_7.dto.request.ProductRequest;
+import com.example.challenge_7.dto.response.ApiResponse;
+import com.example.challenge_7.dto.response.CustomPage;
+import com.example.challenge_7.dto.response.ProductResponse;
+import com.example.challenge_7.services.impl.ProductServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -25,9 +27,13 @@ public class ProductController {
     ProductServiceImpl productServiceImpl;
 
     @GetMapping
-    public ApiResponse<List<ProductResponse>> getProducts() {
-        List<ProductResponse> products = productServiceImpl.getProducts();
-        return ApiResponse.<List<ProductResponse>>builder()
+    public ApiResponse<CustomPage<ProductResponse>> getProducts(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
+                                                                @RequestParam(required = false) String name,
+                                                                @RequestParam(required = false) String brand,
+                                                                @RequestParam(required = false) String category,
+                                                                @RequestParam(required = false) String type) {
+        CustomPage<ProductResponse> products = productServiceImpl.getProducts(pageable, name, brand, category, type);
+        return ApiResponse.<CustomPage<ProductResponse>>builder()
                 .message("Get all products")
                 .responseData(products)
                 .status(products != null ? "success" : "failure")
@@ -36,8 +42,9 @@ public class ProductController {
                 .build();
     }
 
+
     @GetMapping("/{id}")
-    public ApiResponse<ProductResponse> getProduct(@PathVariable("id") int id) {
+    public ApiResponse<ProductResponse> getProduct(@PathVariable("id") String id) {
         ProductResponse productResponse = productServiceImpl.getProduct(id);
         return ApiResponse.<ProductResponse>builder()
                 .message("Get product")
@@ -50,7 +57,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseBody
-    public ApiResponse<ProductResponse> createProduct(@RequestBody ProductCreationRequest request) {
+    public ApiResponse<ProductResponse> createProduct(@RequestBody ProductRequest request) {
         ProductResponse productResponse = productServiceImpl.createProduct(request);
         return ApiResponse.<ProductResponse>builder()
                 .message("Create product")
@@ -62,7 +69,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<ProductResponse> updateProduct(@PathVariable("id") int id, @RequestBody ProductUpdateRequest request) {
+    public ApiResponse<ProductResponse> updateProduct(@PathVariable("id") String id, @RequestBody ProductRequest request) {
         ProductResponse productResponse = productServiceImpl.updateProduct(id, request);
         return ApiResponse.<ProductResponse>builder()
                 .message("Update product")
@@ -75,7 +82,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponse<Void> deleteProduct(@PathVariable("id") int id) {
+    public ApiResponse<Void> deleteProduct(@PathVariable("id") String id) {
         productServiceImpl.deleteProduct(id);
         return ApiResponse.<Void>builder()
                 .message("Delete product")

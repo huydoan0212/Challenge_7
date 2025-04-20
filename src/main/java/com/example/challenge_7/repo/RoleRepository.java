@@ -1,6 +1,6 @@
-package com.example.challenge5.repo;
+package com.example.challenge_7.repo;
 
-import com.example.challenge5.entity.Role;
+import com.example.challenge_7.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

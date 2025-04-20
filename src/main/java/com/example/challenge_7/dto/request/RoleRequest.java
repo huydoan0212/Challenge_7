@@ -1,4 +1,4 @@
-package com.example.challenge5.dto.request;
+package com.example.challenge_7.dto.request;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

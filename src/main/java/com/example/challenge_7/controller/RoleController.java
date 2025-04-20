@@ -1,10 +1,10 @@
-package com.example.challenge5.controller;
+package com.example.challenge_7.controller;
 
-import com.example.challenge5.dto.request.RoleRequest;
-import com.example.challenge5.dto.response.ApiResponse;
-import com.example.challenge5.dto.response.ProductResponse;
-import com.example.challenge5.dto.response.RoleResponse;
-import com.example.challenge5.services.RoleService;
+
+import com.example.challenge_7.dto.request.RoleRequest;
+import com.example.challenge_7.dto.response.ApiResponse;
+import com.example.challenge_7.dto.response.RoleResponse;
+import com.example.challenge_7.services.RoleService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

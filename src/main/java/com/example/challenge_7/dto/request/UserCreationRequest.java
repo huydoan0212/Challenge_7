@@ -1,4 +1,4 @@
-package com.example.challenge5.dto.request;
+package com.example.challenge_7.dto.request;
 
 import jakarta.validation.constraints.Size;
 import lombok.*;

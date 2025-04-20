@@ -1,12 +1,12 @@
-package com.example.challenge5.exception;
+package com.example.challenge_7.exception;
 
-import com.example.challenge5.dto.response.ApiResponse;
+import com.example.challenge_7.dto.response.ApiResponse;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import org.springframework.security.access.AccessDeniedException;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -58,5 +58,15 @@ public class GlobalExceptionHandler {
                         .build());
     }
 
-
+    @ExceptionHandler(value = PropertyReferenceException.class)
+    ResponseEntity<ApiResponse> handlingPropertyReferenceException(PropertyReferenceException exception) {
+        Error error = Error.SORT_CONDITION_NOT_FOUND;
+        return ResponseEntity
+                .status(error.getStatusCode())
+                .body(ApiResponse.builder()
+                        .message(error.getMessage())
+                        .status("failed")
+                        .timeStamp(LocalDateTime.now())
+                        .build());
+    }
 }

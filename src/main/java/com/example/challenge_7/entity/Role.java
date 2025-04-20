@@ -1,5 +1,6 @@
-package com.example.challenge5.entity;
+package com.example.challenge_7.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -18,8 +19,10 @@ import java.util.Set;
 public class Role {
     @Id
     String name;
+
     String description;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     Set<User> users;
 }

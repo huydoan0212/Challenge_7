@@ -1,4 +1,4 @@
-package com.example.challenge5.dto.response;
+package com.example.challenge_7.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

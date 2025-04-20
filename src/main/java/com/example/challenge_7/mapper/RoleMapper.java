@@ -1,12 +1,14 @@
-package com.rental.rentalapplication.mapper;
+package com.example.challenge_7.mapper;
 
-import com.rental.rentalapplication.dto.request.RoleRequest;
-import com.rental.rentalapplication.dto.response.RoleResponse;
-import com.rental.rentalapplication.entity.Role;
+
+import com.example.challenge_7.dto.request.RoleRequest;
+import com.example.challenge_7.dto.response.RoleResponse;
+import com.example.challenge_7.entity.Role;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
 
 @Mapper(componentModel = "spring")
+@Component
 public interface RoleMapper {
     Role toRole(RoleRequest request);
 

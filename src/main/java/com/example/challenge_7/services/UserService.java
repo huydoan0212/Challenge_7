@@ -1,16 +1,18 @@
-package com.example.challenge5.services;
+package com.example.challenge_7.services;
 
-import com.example.challenge5.dto.request.UserCreationRequest;
-import com.example.challenge5.dto.request.UserUpdateRequest;
-import com.example.challenge5.dto.response.UserResponse;
 
-import java.util.List;
+import com.example.challenge_7.dto.request.UserCreationRequest;
+import com.example.challenge_7.dto.request.UserUpdateRequest;
+import com.example.challenge_7.dto.response.CustomPage;
+import com.example.challenge_7.dto.response.UserResponse;
+import org.springframework.data.domain.Pageable;
+
 
 public interface UserService {
 
     UserResponse getUserById(String id);
 
-    List<UserResponse> getAllUsers();
+    CustomPage<UserResponse> getAllUsers(Pageable pageable, String username, String firstName, String lastName, String sortBy);
 
     UserResponse updateUser(String id, UserUpdateRequest request);
 
@@ -19,4 +21,7 @@ public interface UserService {
     UserResponse createUser(UserCreationRequest request);
 
     UserResponse getMyInfo();
+
+
+//    CustomPage<?> advanceSearchWithSpecifications(Pageable pageable, String[] user, String[] address);
 }

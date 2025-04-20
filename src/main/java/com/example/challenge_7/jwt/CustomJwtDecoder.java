@@ -1,7 +1,8 @@
-package com.example.challenge5.jwt;
+package com.example.challenge_7.jwt;
 
-import com.example.challenge5.exception.CustomException;
-import com.example.challenge5.services.impl.AuthenticationServiceImpl;
+
+import com.example.challenge_7.exception.CustomException;
+import com.example.challenge_7.services.impl.AuthenticationServiceImpl;
 import com.nimbusds.jose.JOSEException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

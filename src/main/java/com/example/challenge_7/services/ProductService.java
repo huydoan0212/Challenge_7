@@ -1,20 +1,19 @@
-package com.example.challenge5.services;
+package com.example.challenge_7.services;
 
 
-import com.example.challenge5.dto.request.ProductCreationRequest;
-import com.example.challenge5.dto.request.ProductUpdateRequest;
-import com.example.challenge5.dto.response.ProductResponse;
-
-import java.util.List;
+import com.example.challenge_7.dto.request.ProductRequest;
+import com.example.challenge_7.dto.response.CustomPage;
+import com.example.challenge_7.dto.response.ProductResponse;
+import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
-    ProductResponse createProduct(ProductCreationRequest request);
+    ProductResponse createProduct(ProductRequest request);
 
-    ProductResponse updateProduct(int id, ProductUpdateRequest request);
+    ProductResponse updateProduct(String id, ProductRequest request);
 
-    void deleteProduct(int id);
+    void deleteProduct(String id);
 
-    List<ProductResponse> getProducts();
+    CustomPage<ProductResponse> getProducts(Pageable pageable, String name, String brand, String category, String type);
 
-    ProductResponse getProduct(int id);
+    ProductResponse getProduct(String id);
 }

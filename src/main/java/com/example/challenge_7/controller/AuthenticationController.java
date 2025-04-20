@@ -1,9 +1,10 @@
-package com.example.challenge5.controller;
+package com.example.challenge_7.controller;
 
-import com.example.challenge5.dto.request.AuthenticationRequest;
-import com.example.challenge5.dto.response.ApiResponse;
-import com.example.challenge5.dto.response.AuthenticationResponse;
-import com.example.challenge5.services.impl.AuthenticationServiceImpl;
+
+import com.example.challenge_7.dto.request.AuthenticationRequest;
+import com.example.challenge_7.dto.response.ApiResponse;
+import com.example.challenge_7.dto.response.AuthenticationResponse;
+import com.example.challenge_7.services.impl.AuthenticationServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

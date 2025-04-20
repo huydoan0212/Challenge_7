@@ -1,5 +1,6 @@
 package com.example.challenge_7.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -14,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Order {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
@@ -23,14 +24,22 @@ public class Order {
     int totalPrice;
     String status;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     User user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
     List<OrderDetail> orderDetails;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "receiver_id", nullable = false)
     Receiver receiver;
+
+    @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
+    @JsonIgnore
+    List<Transaction> transactions;
+
 }

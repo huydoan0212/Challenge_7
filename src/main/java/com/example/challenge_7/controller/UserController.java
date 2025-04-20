@@ -1,18 +1,23 @@
-package com.example.challenge5.controller;
+package com.example.challenge_7.controller;
 
-import com.example.challenge5.dto.request.UserCreationRequest;
-import com.example.challenge5.dto.request.UserUpdateRequest;
-import com.example.challenge5.dto.response.ApiResponse;
-import com.example.challenge5.dto.response.UserResponse;
-import com.example.challenge5.entity.User;
-import com.example.challenge5.services.UserService;
+
+import com.example.challenge_7.dto.request.UserCreationRequest;
+import com.example.challenge_7.dto.request.UserUpdateRequest;
+import com.example.challenge_7.dto.response.ApiResponse;
+import com.example.challenge_7.dto.response.CustomPage;
+import com.example.challenge_7.dto.response.UserResponse;
+import com.example.challenge_7.services.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -81,4 +86,22 @@ public class UserController {
                 .responseData(response)
                 .build();
     }
+
+    @GetMapping
+    public ApiResponse<CustomPage<UserResponse>> getAllUsers(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
+                                                             @RequestParam(required = false) String firstName,
+                                                             @RequestParam(required = false) String lastName,
+                                                             @RequestParam(required = false) String username,
+                                                             @RequestParam(required = false) String sortBy) {
+        CustomPage<UserResponse> users = userService.getAllUsers(pageable, username, firstName, lastName, sortBy);
+
+        return ApiResponse.<CustomPage<UserResponse>>builder()
+                .message("Get users")
+                .status("success")
+                .timeStamp(LocalDateTime.now())
+                .responseData(users)
+                .build();
+    }
+
+
 }

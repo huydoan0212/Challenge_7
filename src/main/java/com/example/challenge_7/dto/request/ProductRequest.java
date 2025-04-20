@@ -8,13 +8,14 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductCreationRequest {
+public class ProductRequest {
     String code;
     String name;
     String category;
     String brand;
     String type;
     String description;
+    Integer price;
 
 
 }

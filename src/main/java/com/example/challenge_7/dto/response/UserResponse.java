@@ -1,4 +1,4 @@
-package com.example.challenge5.dto.response;
+package com.example.challenge_7.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -17,4 +17,5 @@ public class UserResponse {
     String lastName;
     LocalDate dob;
     Set<RoleResponse> roles;
+
 }
